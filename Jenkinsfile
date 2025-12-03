@@ -28,7 +28,7 @@ pipeline {
         }
         stage('docker build image') {
             steps {
-                sh 'docker build image -t ${DIN} .'
+                sh 'docker image build -t ${DIN} .'
             }
         }
         stage('docker login') {
