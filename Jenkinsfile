@@ -3,53 +3,26 @@ pipeline {
     // environment {}
 
     stages {
-
         stage('scm') {
             steps {
-                echo "pulling the code from GitHub Repository"
+                echo "already taken care by Jenkins"
             }
         }
 
-        stage('build') {
+        stage('prepare env') {
             steps {
-                echo "building the code"
+                // execute a shell command
+                sh 'pip3 install --break-system-package -r requirements.txt '
             }
         }
 
-        stage('test') {
+        stage('test the application') {
             steps {
-                echo "testing the application"
+                sh 'pytest test_app.py'
             }
         }
 
-        stage('quality check') {
-            steps {
-                echo "checking the quality"
-            }
-        }
-
-        stage('artifacts') {
-            steps {
-                echo "generating artifacts"
-            }
-        }
-
-        stage('provision infrastructure') {
-            steps {
-                echo "provisioning infrastructure using terraform"
-            }
-        }
-
-        stage('configure infra') {
-            steps {
-                echo "configuring the infra using ansible"
-            }
-        }
-
-        stage('deploy') {
-            steps {
-                echo "deploying the application"
-            }
-        }
+        // stage('prepare the image') {
+        // }
     }
 }
