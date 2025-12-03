@@ -1,6 +1,7 @@
 FROM python:3.10-slim
 WORKDIR /src
 COPY . .
-RUN pip install -r requirement.txt
-EXPOSE 5000
-CMD ["python", "app.py"]
+EXPOSE 4000
+RUN pip install -r req.txt 
+# CMD python server.py
+CMD ["python", "server.py"]
