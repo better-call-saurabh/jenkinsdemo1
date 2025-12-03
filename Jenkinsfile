@@ -36,6 +36,16 @@ pipeline {
                 sh 'echo ${DOCKER_AUTH_TOKEN} | docker login -u ${DOCKER_USER_NAME} --password-stdin'
             }
         }
+        stage('push docker image') {
+            steps {
+                sh 'docker image push ${DIN}'
+            }
+        }
+        stage('restart service') {
+            steps {
+                sh 'docker service update --force -image ${DIN} python-cpp'
+            }
+        }
 
         // stage('prepare the image') {
         // }
