@@ -1,4 +1,6 @@
-FROM httpd:alpine3.22
-COPY index.html /usr/local/apache2/htdocs
-EXPOSE 80
-
+FROM python
+WORKDIR /src
+COPY . .
+RUN pip install -r requirement.txt
+EXPOSE 5000
+CMD python app.py
