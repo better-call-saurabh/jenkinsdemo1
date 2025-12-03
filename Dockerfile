@@ -1,6 +1,6 @@
-FROM python
+FROM python:3.10-slim
 WORKDIR /src
 COPY . .
 RUN pip install -r requirement.txt
 EXPOSE 5000
-CMD python app.py
+CMD ["python", "app.py"]

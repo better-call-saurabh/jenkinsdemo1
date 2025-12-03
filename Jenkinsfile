@@ -1,6 +1,11 @@
 pipeline {
     agent any
-    // environment {}
+    environment {
+        DIN="better0call/python-test-app"
+        DOCKER_USER_NAME="better0call"
+        DOCKER_AUTH_TOKEN=credentials('DOCKER_AUTH_TOKEN')
+
+    }
 
     stages {
         stage('scm') {
@@ -19,6 +24,16 @@ pipeline {
         stage('test the application') {
             steps {
                 sh 'pytest test_app.py'
+            }
+        }
+        stage('docker build image') {
+            steps {
+                sh 'docker build image -t ${DIN} .'
+            }
+        }
+        stage('docker login') {
+            steps {
+                sh 'echo ${DOCKER_AUTH_TOKEN} | docker login -u ${DOCKER_USER_NAME} --password-stdin'
             }
         }
 
