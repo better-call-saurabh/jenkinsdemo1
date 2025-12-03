@@ -43,7 +43,7 @@ pipeline {
         }
         stage('restart service') {
             steps {
-                sh 'docker service update --force --image ${DIN} -p 4000:4000 python-app'
+                sh 'docker service update --force --image ${DIN} python-app'
             }
         }
 
